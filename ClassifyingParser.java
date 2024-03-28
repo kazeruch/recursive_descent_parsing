@@ -21,7 +21,7 @@ class Source {
 
 class Parser extends Source {
 
-    // スーパークラスのコンストラクタを呼び出す
+    // calls constructer of the super class
     public Parser(String str) {
         super(str);
     }
@@ -33,7 +33,9 @@ class Parser extends Source {
             sb.append((char) ch);
             next();
         }
-        return sb.toString();
+
+        // It cannot be converted directly from a StringBuilder object to an Integer
+        return Integer.parseInt(sb.toString());
     }
 }
 
