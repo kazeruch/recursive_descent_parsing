@@ -1,3 +1,4 @@
+package java_ver;
 public class Number {
 
     static final String number(String s) {

@@ -1,3 +1,4 @@
+package java_ver;
 class Source {
 
     private final String str;

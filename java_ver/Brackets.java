@@ -1,4 +1,6 @@
+package java_ver;
 class Source {
+
     private final String str;
     private int pos;
 
@@ -24,12 +26,6 @@ class Parser extends Source {
         super(str);
     }
 
-    public void spaces() {
-        while (peek() == ' ') {
-            next();
-        }
-    }
-
     public final int number() {
         StringBuilder sb = new StringBuilder();
         int ch;
@@ -40,6 +36,7 @@ class Parser extends Source {
         return Integer.parseInt(sb.toString());
     }
 
+    // expr = term, {("+", term) | ("-", term)}
     public final int expr() {
         int x = term();
         for (;;) {
@@ -58,9 +55,10 @@ class Parser extends Source {
         return x;
     }
 
+    // term = factor, {("*", factor) | ("/", factor)}
     public final int term() {
         int x = factor();
-        for(;;) {
+        for (;;) {
             switch (peek()) {
                 case '*':
                     next();
@@ -76,37 +74,27 @@ class Parser extends Source {
         return x;
     }
 
+    // factor, ("(", expr, ")") | number
     public final int factor() {
-        int ret;
-        spaces();
-        if(peek() == '(') {
+        if (peek() == '(') {
             next();
-            ret = expr();
-            if(peek() == ')') {
+            int ret = expr();
+            if (peek() == ')') {
                 next();
-            } 
-        } else {
-            ret = number();
+            }
+            return ret;
         }
-        spaces();
-        return ret;
+        return number();
     }
 }
 
-public class Final {
+public class Brackets {
     static void test(String s) {
         System.out.println(s + " = " + new Parser(s).expr());
     }
 
     public static void main(String[] args) {
-        test("1 + 2");
-        test("123");
-        test("1 + 2 + 3");
-        test("1 - 2 - 3");
-        test("1 - 2 + 3");
-        test("2 * 3 + 4");
-        test("2 + 3 * 4");
-        test("100 / 10 / 2");
-        test("( 2 + 3 ) * 4");
+        test("(2+3)*4");
+        test("4*(2+3)");
     }
 }
