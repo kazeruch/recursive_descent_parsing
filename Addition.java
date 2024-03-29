@@ -1,9 +1,9 @@
 class Source {
 
-    private final string str;
+    private final String str;
     private int pos;
 
-    public Source(String str)i {
+    public Source(String str) {
         this.str = str;
     }
 
@@ -19,7 +19,7 @@ class Source {
     }
 }
 
-class Parser extend Source {
+class Parser extends Source {
 
     public Parser(String str) {
         super(str);
@@ -45,7 +45,7 @@ class Parser extend Source {
     }
 }
 
-public class Main {
+public class Addition {
 
     static void test(String s) {
         System.out.println(s + " = " + new Parser(s).expr());

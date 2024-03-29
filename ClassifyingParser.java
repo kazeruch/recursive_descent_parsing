@@ -26,7 +26,7 @@ class Parser extends Source {
         super(str);
     }
 
-    public final String number() {
+    public final int number() {
         StringBuilder sb = new StringBuilder();
         int ch;
         while ((ch = peek()) >= 0 && Character.isDigit(ch)) {
